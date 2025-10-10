@@ -13,12 +13,12 @@ const email = document.getElementById("email");
 const emailConfirmation = document.getElementById("emailConfirmation");
 const transactionType = document.getElementById("transactionType");
 
-const validFirstName = ["Zion"];
-const validLastName = ["Scott"];
-const validPassword = ["&UF73"];
-const validID = ["2468"];
-const validPhoneNumber = ["555-555-5555"];
-const validEmail = ["zds@njit.edu"];
+const validFirstName = ["Zion", "John"];
+const validLastName = ["Scott", "Doe"];
+const validPassword = ["&UF73", "$7H5U"];
+const validID = ["2468", "1359"];
+const validPhoneNumber = ["555-555-5555", "555-555-5555 ext555"];
+const validEmail = ["zds@njit.edu", "nba@gmail.com"];
 
 let validAccount = false;
 
