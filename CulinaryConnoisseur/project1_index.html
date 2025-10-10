@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+
+    <head>
+        <meta charset="utf-8" />
+        <title>Culinary Connoisseurs</title>
+        <link rel="stylesheet" href="project1.css" />
+    </head>
+
+<body>
+
+    <h1 class="title">Culinary Connoisseurs</h1>
+
+    
+    <form id="Culinary">
+        <label for="firstName">Caterer's First Name:</label> 
+        <input placeholder="Example: Zion" type="text" id="firstName" name="firstName"required>
+        <label for="firstName">REQUIRED</label><br>
+
+        <label for="lastName">Caterer's Last Name:</label>
+        <input placeholder="Example: Scott" type="text" id="lastName" name="lastName"required>
+        <label for="lastName">REQUIRED</label><br>
+
+        <label for="password">Caterer's Password:</label>
+        <input placeholder="Example: &UF73" type="password" id="password" name="password"required>
+        <label for="password">REQUIRED</label><br>
+
+        <label for="idNumber">Caterer's ID #:</label>
+        <input placeholder="Example: 2468" type="number" id="idNumber" name="idNumber"required>
+        <label for="idNumber">REQUIRED</label><br>
+
+        <label for="phoneNumber">Caterer's Phone #:</label>
+        <input placeholder="Example: 555-555-5555 ext 555" type="text" id="phoneNumber" name="phoneNumber">
+        <label for="phoneNumber">REQUIRED</label><br>
+
+        <label for="email">Representative's Email</label>
+        <input placeholder="Example: zds@njit.edu" type="email" id="email" name="email" ><br>
+
+        <input type="checkbox" id="emailConfirmation" name="emailConfirmation" value="no">
+        <label for="emailConfirmation">Check the box to request an Email Confirmation: </label><br>
+
+
+        <label for="TransactionType">Select a Transaction:</label>
+        <select id="transactionType" name="transactionType">
+            <option value="Search a caterer's accounts"selected>Search a caterer's accounts</option>
+            <option value="Book a clients catering event">Book a clients catering event</option>
+            <option value="Cancel a clients catering event">Cancel a clients catering event</option>
+            <option value="Request additional catering services">Request additional catering services</option>
+            <option value="Update additional catering services">Update additional catering services</option>
+            <option value="Create a New Client">Create a New Client</option>
+        </select><br>
+
+        <div class="buttons">
+            <button id="submitButton" type="submit">Submit</button>
+            <button id="resetButton" type="reset">Reset</button>
+        </div>
+    </form>
+
+    <script src="project1.js"></script>
+
+</body>
+</html>

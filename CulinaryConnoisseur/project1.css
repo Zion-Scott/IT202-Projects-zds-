@@ -1,0 +1,49 @@
+body {
+    font-family: sans-serif;
+    background: url('CulinaryConnoisseur.jpg') center / cover no-repeat fixed;
+    border: 6px solid blue;
+    border-radius: 25px;
+    padding: 24px;
+    width: 500px;              /* fixed width */
+    margin: 20px auto;         /* centers the blue box in the middle */
+    text-align: center;
+    font-family:Geneva;
+}
+
+.title{
+    margin:0 0 14px;
+    text-align:center;
+    font-weight:900;
+    color: var(--brand);
+    letter-spacing:.5px;
+    font-family:Geneva;
+}
+
+
+button {
+    font-family:Geneva;
+    background-color: green;
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    cursor: pointer;
+    font-weight: bold;
+    border-radius: 10px;
+
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+select {
+    font-family:Geneva;
+    width:250px;
+    padding:10px;
+    margin:6px 0;
+    border:2px;
+    background-color: lightgreen;
+    font-size:15px;
+    border-radius:10px;
+    
+}
