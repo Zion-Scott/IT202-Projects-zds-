@@ -1,5 +1,10 @@
 <!DOCTYPE html>
 
+<?php
+session_start();
+require __DIR__ . '/connect.php';  // adjust path if file is in a subfolder
+?>
+
     <head>
         <meta charset="utf-8" />
         <title>Culinary Connoisseurs</title>
@@ -11,7 +16,7 @@
     <h1 class="title">Culinary Connoisseurs</h1>
 
     
-    <form id="Culinary">
+    <form id="CulinaryForm" action="login.php" method="post">
         <label for="firstName">Caterer's First Name:</label> 
         <input placeholder="Example: Zion" type="text" id="firstName" name="firstName"required>
         <label for="firstName">REQUIRED</label><br>
@@ -58,4 +63,7 @@
     <script src="CulConn.js"></script>
 
 </body>
+
+
 </html>
+

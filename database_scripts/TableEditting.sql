@@ -1,0 +1,10 @@
+UPDATE EventSupplies SET cateringID = 1001 WHERE supplyID = 11;
+UPDATE EventSupplies SET cateringID = 1002 WHERE supplyID = 12;
+UPDATE EventSupplies SET cateringID = 1003 WHERE supplyID = 13;
+UPDATE EventSupplies SET cateringID = 1004 WHERE supplyID = 14;
+UPDATE EventSupplies SET cateringID = 1005 WHERE supplyID = 15;
+UPDATE EventSupplies SET cateringID = 1006 WHERE supplyID = 16;
+UPDATE EventSupplies SET cateringID = 1007 WHERE supplyID = 17;
+UPDATE EventSupplies SET cateringID = 1008 WHERE supplyID = 18;
+UPDATE EventSupplies SET cateringID = 1009 WHERE supplyID = 19;
+UPDATE EventSupplies SET cateringID = 1010 WHERE supplyID = 20;
