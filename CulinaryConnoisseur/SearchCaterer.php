@@ -2,15 +2,15 @@
 
 session_start();
 
-// If not logged in, kick them back to login
+// If not logged in, boot back to login
 if (!isset($_SESSION['catererID'])) {
-    header('Location: CulConn_index.php'); // or your login page
+    header('Location: CulConn_index.php'); 
     exit;
 }
 
 require 'connect.php';
 
-$catererID = (int) $_SESSION['catererID']; // cast to int for safety
+$catererID = (int) $_SESSION['catererID']; 
 
 $sql = "
     SELECT
@@ -75,7 +75,7 @@ if (!$result) {
         ?>
     </p>
 
-    <style> /*Styling for ONLY this table page*/
+    <style> /*styling for ONLY this table page*/
     body {
         width: auto !important; 
         max-width: 95vw !important;

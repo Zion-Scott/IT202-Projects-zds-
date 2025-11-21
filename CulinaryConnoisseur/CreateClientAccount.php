@@ -2,7 +2,7 @@
 session_start();
 require 'connect.php'; // adjust path if needed
 
-// Must be logged in as a caterer to create clients
+// must be logged in as a caterer
 if (!isset($_SESSION['catererID'])) {
     echo "<script>
         alert('You must log in as a caterer first.');
@@ -14,7 +14,7 @@ if (!isset($_SESSION['catererID'])) {
 $catererID = (int) $_SESSION['catererID'];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    // Grab and trim all fields
+    // grab and trim all fields
     $clientID      = trim($_POST['clientID'] ?? '');
     $firstName     = trim($_POST['firstName'] ?? '');
     $lastName      = trim($_POST['lastName'] ?? '');
@@ -25,7 +25,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $zipCode       = trim($_POST['zipCode'] ?? '');
     $phoneNumber   = trim($_POST['phoneNumber'] ?? '');
 
-    // Basic validation
+    // basic validation
     if (
         $clientID === '' || !ctype_digit($clientID) ||
         $firstName === '' || $lastName === '' ||
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $clientIDInt = (int) $clientID;
 
-    // Secondary check: does clientID already exist?
+    // secondary check, does clientID already exist?
     $checkSql = "SELECT clientID FROM Clients WHERE clientID = $clientIDInt";
     $checkResult = mysqli_query($connect, $checkSql);
 
@@ -63,7 +63,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Escape strings for safety
+    // escape strings 
     $firstSafe   = mysqli_real_escape_string($connect, $firstName);
     $lastSafe    = mysqli_real_escape_string($connect, $lastName);
     $streetNumSafe = mysqli_real_escape_string($connect, $streetNumber);
@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $zipSafe     = mysqli_real_escape_string($connect, $zipCode);
     $phoneSafe   = mysqli_real_escape_string($connect, $phoneNumber);
 
-    // Insert into Clients
+    // insert sql statement
     $insertClientSql = "
         INSERT INTO Clients (clientID, firstName, lastName)
         VALUES ($clientIDInt, '$firstSafe', '$lastSafe')
@@ -89,7 +89,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Insert into ClientInfo / ClientPersonalInfo
+    // insert into ClientInfo / ClientPersonalInfo
     $insertInfoSql = "
         INSERT INTO ClientInfo (clientID, streetNumber, streetName, city, state, zipCode, phoneNumber)
         VALUES ($clientIDInt, '$streetNumSafe', '$streetNameSafe', '$citySafe', '$stateSafe', '$zipSafe', '$phoneSafe')
@@ -106,7 +106,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Success – you can send them back to booking flow or wherever
+    // Success -> send user back to booking event
     echo "<script>
         alert('Client account created.');
         // If they came from booking, this takes them back to the verify step.

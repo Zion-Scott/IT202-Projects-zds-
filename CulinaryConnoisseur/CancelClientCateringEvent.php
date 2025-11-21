@@ -1,8 +1,8 @@
 <?php
 session_start();
-require 'connect.php'; // adjust path if needed
+require 'connect.php'; 
 
-// Must be logged in as a caterer
+// must be logged in as a caterer
 if (!isset($_SESSION['catererID'])) {
     echo "<script>
         alert('You must log in as a caterer first.');
@@ -13,10 +13,10 @@ if (!isset($_SESSION['catererID'])) {
 
 $catererID = (int) $_SESSION['catererID'];
 
-/*
- * STEP 2: Actually delete, after user has confirmed
- * This runs when we come in with ?doDelete=1&catererID=...&clientID=...&cateringID=...
- */
+/* 
+    step 2: delete, after user has confirmed
+    this runs after ?doDelete=1&catererID=...&clientID=...&cateringID=...
+*/
 if (isset($_GET['doDelete']) && $_GET['doDelete'] === '1') {
     $clientID   = isset($_GET['clientID'])   ? (int) $_GET['clientID']   : 0;
     $cateringID = isset($_GET['cateringID']) ? (int) $_GET['cateringID'] : 0;
@@ -31,14 +31,13 @@ if (isset($_GET['doDelete']) && $_GET['doDelete'] === '1') {
         exit;
     }
 
-    // Optionally delete related supplies first (if you have EventSupplies)
     $deleteSuppliesSql = "
         DELETE FROM EventSupplies
         WHERE cateringID = $cateringID
     ";
     mysqli_query($connect, $deleteSuppliesSql); // ignore errors if no supplies
 
-    // Delete the actual catering event
+    // delete the actual catering event
     $deleteEventSql = "
         DELETE FROM ClientCateringInfo
         WHERE cateringID = $cateringID
@@ -57,7 +56,7 @@ if (isset($_GET['doDelete']) && $_GET['doDelete'] === '1') {
     }
 
     if (mysqli_affected_rows($connect) === 0) {
-        // Nothing deleted – record vanished between confirm and delete
+        // nothing deleted -> doesn't exist
         echo "<script>
             alert('No matching booking found to cancel.');
             window.location.href = 'CancelClientCateringEvent.php';
@@ -65,7 +64,7 @@ if (isset($_GET['doDelete']) && $_GET['doDelete'] === '1') {
         exit;
     }
 
-    // Success
+    // event successfully cancelled
     echo "<script>
         alert('Catering event cancelled.\\nCatererID: $catererID\\nClientID: $clientID\\nCateringID: $cateringID');
         window.location.href = 'CancelClientCateringEvent.php';
@@ -74,8 +73,8 @@ if (isset($_GET['doDelete']) && $_GET['doDelete'] === '1') {
 }
 
 /*
- * STEP 1: Handle the initial POST from the form
- * We only CHECK if the event exists and, if so, ask for confirmation.
+    handle the initial POST from the form
+    only check if the event exists and, if so, ask for confirmation
  */
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $clientID   = trim($_POST['clientID'] ?? '');
@@ -93,7 +92,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $clientID   = (int) $clientID;
     $cateringID = (int) $cateringID;
 
-    // Check if this event exists for this caterer + client + cateringID
+    // check if this event exists for this caterer + client + cateringID
     $checkSql = "
         SELECT cateringID
         FROM ClientCateringInfo
@@ -121,9 +120,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Event EXISTS -> show confirm dialog with JS.
-    // If OK -> go to same page with ?doDelete=1...
-    // If Cancel -> back to cancel form.
+    /* 
+     event exists -> show confirm dialog with JS
+     If OK -> go to same page with ?doDelete=1...
+     If cancel -> back to cancel form.
+     */
     echo "<script>
         if (confirm('Are you sure you want to cancel this event?')) {
             window.location.href =

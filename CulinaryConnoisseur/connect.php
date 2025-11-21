@@ -1,5 +1,5 @@
 <?php
-// connect.php — DB connection for Culinary Connoisseurs (Project 2)
+// connect.php — DB connection 
 
 $servername = "sql1.njit.edu";   // always this at NJIT
 $username   = "zds";             // your UCID

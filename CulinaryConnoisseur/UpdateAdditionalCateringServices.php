@@ -154,7 +154,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $stage === 'verify') {
         <?php echo htmlspecialchars($catererID); ?>
     </p>
 
-    <!-- Stage 1: Verify CateringID + SupplyID -->
+    <!-- verify CateringID and SupplyID -->
     <?php if (!$recordFound): ?>
         <form method="post" action="UpdateAdditionalCateringServices.php">
             <input type="hidden" name="stage" value="verify">
@@ -168,7 +168,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $stage === 'verify') {
             <button type="submit">Find Record</button>
         </form>
     <?php else: ?>
-        <!-- Stage 2: Record found, show update form -->
+        <!-- record found, show update form -->
         <p>
             Record found:<br>
             Catering ID: <?php echo htmlspecialchars($currentRecord['cateringID']); ?><br>

@@ -2,19 +2,18 @@
 session_start();
 require __DIR__ . '/connect.php';
 
-// Only handle POST
+// only handle POST methods
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header("Location: CulConn_index.php");
     exit;
 }
 
 /*
- * 1. Get form data (names MUST match CulConn_index.php)
+  1. Get form data (names must match CulConn_index.php)
  */
 $firstName   = isset($_POST['firstName'])   ? trim($_POST['firstName'])   : '';
 $lastName    = isset($_POST['lastName'])    ? trim($_POST['lastName'])    : '';
 $password    = isset($_POST['password'])    ? trim($_POST['password'])    : '';
-// NOTE: form field is name="idNumber"
 $catererID   = isset($_POST['idNumber'])    ? (int)$_POST['idNumber']     : 0;
 $phoneNumber = isset($_POST['phoneNumber']) ? trim($_POST['phoneNumber']) : '';
 $email       = isset($_POST['email'])       ? trim($_POST['email'])       : '';
@@ -22,8 +21,8 @@ $emailChecked = isset($_POST['emailConfirmation']);
 $transaction  = isset($_POST['transactionType']) ? $_POST['transactionType'] : '';
 
 /*
- * 2. Build the SELECT statement
- *    If checkbox is checked, include email in the WHERE clause.
+ 2. make the SELECT statement
+    If checkbox is checked, include email in the WHERE clause.
  */
 $firstNameEsc = mysqli_real_escape_string($connect, $firstName);
 $lastNameEsc  = mysqli_real_escape_string($connect, $lastName);
@@ -43,18 +42,18 @@ if ($emailChecked) {
 }
 
 /*
- * 3. Execute the query
+  3. run the query
  */
 $result = mysqli_query($connect, $sql);
 
 if (!$result || mysqli_num_rows($result) === 0) {
-    // No matching row → send them back to login with a clean form
+    // No matching row -> send user back to login 
     header("Location: CulConn_index.php");
     exit;
 }
 
 /*
- * 4. We have a match → fetch row and set session
+  4. match found -> fetch row and set session
  */
 $row = mysqli_fetch_assoc($result);
 
@@ -65,7 +64,7 @@ $_SESSION['phoneNumber'] = $row['phoneNumber'];
 $_SESSION['email']       = $row['emailAddress'];
 
 /*
- * 5. Redirect based on dropdown choice
+  5. redirect based on dropdown choice
  */
 switch ($transaction) {
     case "Search a caterer's accounts":

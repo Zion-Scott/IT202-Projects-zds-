@@ -1,8 +1,8 @@
 <?php
 session_start();
-require 'connect.php'; // adjust path if connect.php is in a parent folder
+require 'connect.php'; 
 
-// Make sure a caterer is logged in
+// make sure a caterer is logged in
 if (!isset($_SESSION['catererID'])) {
     echo "<script>
         alert('You must log in as a caterer first.');
@@ -25,13 +25,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     $clientID = (int)$clientID;
 
-    // Check if client exists in Clients table
+    // check if client exists in Clients table
     $sql = "SELECT clientID, firstName, lastName
             FROM Clients
             WHERE clientID = $clientID";
     $result = mysqli_query($connect, $sql);
 
-    // Query error
+    // query error handling
     if (!$result) {
         $err = addslashes(mysqli_error($connect));
         echo "<script>
@@ -41,7 +41,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // No rows = client does NOT exist
+    // no matching rows = client does not exist
     if (mysqli_num_rows($result) === 0) {
         echo "<script>
             if (confirm('Client does not exist. Press OK to re-enter data or Cancel to create a new client account.')) {
@@ -54,7 +54,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </script>";
         exit;
     } else {
-        // Client exists → save to session and go to booking form page
+        // client exists -> save to session and go to booking form page
         $row = mysqli_fetch_assoc($result);
 
         $_SESSION['booking_clientID']   = $row['clientID'];

@@ -2,7 +2,7 @@
 session_start();
 require 'connect.php';
 
-// Enforce flow: must be logged in and have a verified client
+// caterer must be logged in and have a verified client
 if (!isset($_SESSION['catererID'])) {
     echo "<script>
         alert('You must log in as a caterer first.');
@@ -22,6 +22,7 @@ $catererID  = (int)$_SESSION['catererID'];
 $clientID   = (int)$_SESSION['booking_clientID'];
 $clientName = $_SESSION['booking_clientName'] ?? '';
 
+//get POST data from DB
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $dateOfEvent = trim($_POST['dateOfEvent'] ?? '');
     $foodOrder   = trim($_POST['foodOrder'] ?? '');
@@ -34,7 +35,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         exit;
     }
 
-    // Generate random unique cateringID in a safe range
+    // generate random unique cateringID in 4 digit range
     do {
         $randomCateringID = rand(1001, 9999);
         $checkSql = "SELECT cateringID FROM ClientCateringInfo WHERE cateringID = $randomCateringID";
@@ -81,6 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="utf-8">
     <title>Book Client Catering Event</title>
     <link rel="stylesheet" href="CulConn.css">
+    <!--JS alerts to direct user-->
     <script>
         function validateAndConfirm() {
             const dateField = document.getElementById('dateOfEvent');

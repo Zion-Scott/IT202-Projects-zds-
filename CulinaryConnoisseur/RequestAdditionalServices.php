@@ -1,8 +1,8 @@
 <?php
 session_start();
-require 'connect.php'; // adjust path if needed
+require 'connect.php'; 
 
-// Must be logged in as a caterer
+// must be logged in as a caterer
 if (!isset($_SESSION['catererID'])) {
     echo "<script>
         alert('You must log in as a caterer first.');
@@ -13,10 +13,10 @@ if (!isset($_SESSION['catererID'])) {
 
 $catererID = (int) $_SESSION['catererID'];
 
-$stage = $_POST['stage'] ?? 'verify';  // 'verify' or 'add'
+$stage = $_POST['stage'] ?? 'verify'; 
 $verifiedCateringID = null;
 
-// Stage 2: handle adding supplies
+// handle adding supplies
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $stage === 'add') {
     $cateringID = isset($_POST['cateringID']) ? (int) $_POST['cateringID'] : 0;
     $supplyType = trim($_POST['supplyType'] ?? '');
@@ -32,7 +32,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $stage === 'add') {
 
     $qtyInt = (int) $quantity;
 
-    // Double-check that cateringID still exists
+    // check that cateringID exists
     $checkSql = "
         SELECT cateringID
         FROM ClientCateringInfo
@@ -50,7 +50,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $stage === 'add') {
 
     $supplySafe = mysqli_real_escape_string($connect, $supplyType);
 
-    // Insert additional supplies
+    // insert statement for additional supplies
     $insertSql = "
         INSERT INTO EventSupplies (cateringID, supplyType, quantity)
         VALUES ($cateringID, '$supplySafe', $qtyInt)
@@ -73,7 +73,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $stage === 'add') {
     exit;
 }
 
-// Stage 1: handle verifying the cateringID
+//  verify cateringID
 if ($_SERVER['REQUEST_METHOD'] === 'POST' && $stage === 'verify') {
     $cateringIDInput = trim($_POST['cateringID'] ?? '');
 
@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $stage === 'verify') {
 
     $cateringID = (int) $cateringIDInput;
 
-    // Check if this event exists at all (we don't force catererID match here, but you can)
+    // check if this event exists in DB
     $checkSql = "
         SELECT cateringID, clientID, catererID, dateOfEvent, foodOrder
         FROM ClientCateringInfo
@@ -112,7 +112,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $stage === 'verify') {
         exit;
     }
 
-    // Valid event – show the second form below
+    //  event exists –> show the second form
     $eventRow = mysqli_fetch_assoc($checkResult);
     $verifiedCateringID = (int) $eventRow['cateringID'];
     $verifiedClientID   = (int) $eventRow['clientID'];
@@ -139,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $stage === 'verify') {
         <?php echo htmlspecialchars($catererID); ?>
     </p>
 
-    <!-- Stage 1: Verify CateringID -->
+    <!-- verify CateringID -->
     <?php if ($verifiedCateringID === null): ?>
         <form method="post" action="RequestAdditionalServices.php">
             <input type="hidden" name="stage" value="verify">
@@ -150,7 +150,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $stage === 'verify') {
             <button type="submit">Verify Event</button>
         </form>
     <?php else: ?>
-        <!-- Stage 2: Event found, show extra services form -->
+        <!--  Event found, show extra services form -->
         <p>
             Catering event found:<br>
             Catering ID: <?php echo htmlspecialchars($verifiedCateringID); ?><br>
