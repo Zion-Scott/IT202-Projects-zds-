@@ -2,6 +2,8 @@
 session_start();
 require 'connect.php'; // adjust path if needed
 
+include 'navbar.php';
+
 // Must be logged in as a caterer
 if (!isset($_SESSION['catererID'])) {
     echo "<script>
@@ -140,6 +142,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $stage === 'verify') {
     <meta charset="utf-8">
     <title>Update Additional Catering Services</title>
     <link rel="stylesheet" href="CulConn.css">
+    <link rel="stylesheet" href="style.css">
+
     <script>
         function confirmUpdate() {
             return confirm('Do you want to update these additional services for this event?');

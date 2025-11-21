@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'connect.php'; 
+include 'navbar.php';
 
 // make sure a caterer is logged in
 if (!isset($_SESSION['catererID'])) {
@@ -76,6 +77,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="utf-8">
     <title>Verify Client - Book Catering Event</title>
     <link rel="stylesheet" href="CulConn.css">
+    <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
     <h1 class="title">Verify Client for Catering Event</h1>

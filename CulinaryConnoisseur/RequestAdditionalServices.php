@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'connect.php'; 
+include 'navbar.php';
 
 // must be logged in as a caterer
 if (!isset($_SESSION['catererID'])) {
@@ -125,6 +126,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $stage === 'verify') {
     <meta charset="utf-8">
     <title>Request Additional Catering Services</title>
     <link rel="stylesheet" href="CulConn.css">
+    <link rel="stylesheet" href="style.css">
+
     <script>
         function confirmExtraServices() {
             return confirm('Do you want to request these additional services for this event?');

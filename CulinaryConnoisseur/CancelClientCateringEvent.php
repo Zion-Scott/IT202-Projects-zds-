@@ -1,6 +1,7 @@
 <?php
 session_start();
 require 'connect.php'; 
+include 'navbar.php';
 
 // must be logged in as a caterer
 if (!isset($_SESSION['catererID'])) {
@@ -145,6 +146,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="utf-8">
     <title>Cancel Client Catering Event</title>
     <link rel="stylesheet" href="CulConn.css">
+    <link rel="stylesheet" href="style.css">
+
 </head>
 <body>
     <h1 class="title">Cancel a Client&apos;s Catering Event</h1>

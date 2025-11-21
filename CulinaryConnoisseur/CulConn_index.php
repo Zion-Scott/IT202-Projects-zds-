@@ -2,13 +2,18 @@
 
 <?php
 session_start();
-require __DIR__ . '/connect.php';  // adjust path if file is in a subfolder
+require __DIR__ . '/connect.php';  
+
+include 'navbar.php';
+
 ?>
 
     <head>
         <meta charset="utf-8" />
         <title>Culinary Connoisseurs</title>
         <link rel="stylesheet" href="CulConn.css" />
+        <link rel="stylesheet" href="style.css"/>
+
     </head>
 
 <body>

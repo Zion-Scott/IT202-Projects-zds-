@@ -10,6 +10,7 @@ if (!isset($_SESSION['catererID'])) {
 
 require 'connect.php';
 
+
 $catererID = (int) $_SESSION['catererID']; 
 
 $sql = "
