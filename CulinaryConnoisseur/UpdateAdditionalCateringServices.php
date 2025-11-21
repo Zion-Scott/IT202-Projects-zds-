@@ -125,7 +125,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && $stage === 'verify') {
         echo "<script>
             alert('Record not found, please check values.');
             window.location.href = 'UpdateAdditionalCateringServices.php';
-        </script>";
+            </script>";
         exit;
     }
 
